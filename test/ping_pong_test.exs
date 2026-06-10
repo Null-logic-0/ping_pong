@@ -24,6 +24,23 @@ defmodule PingPongTest do
     assert result == {:error, {:mock_error, false}}
   end
 
+  test "send_async returns a task that resolves service result" do
+    assert {:ok, %Task{} = task} = PingPong.send_async(:mock, %{message: "Ping!"}, %{})
+    assert Task.await(task) == {:ok, "Pong! 🏓"}
+  end
+
+  test "send_multiple sends notifications and preserves ids" do
+    notifications = [
+      first: {:mock, %{message: "Ping!"}, %{}},
+      second: {:mock, %{}, %{}}
+    ]
+
+    assert PingPong.send_multiple(notifications) == [
+             first: {:ok, "Pong! 🏓"},
+             second: {:error, {:mock_error, false}}
+           ]
+  end
+
   test "Discord notification must not work with missing params", %{
     expected_missing_err: expected_missing_err
   } do

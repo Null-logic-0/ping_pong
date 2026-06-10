@@ -27,7 +27,7 @@ defmodule PingPong.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.25.5", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false},
       {:req, "~> 0.5"},
       {:jason, "~> 1.4"}
     ]
@@ -36,13 +36,14 @@ defmodule PingPong.MixProject do
   defp docs do
     [
       main: "readme",
-      source_url: "",
-      extras: ["README.md"]
+      source_url: "https://github.com/Null-logic-0/ping_pong",
+      extras: ["README.md", "guides/discord.md", "guides/telegram.md", "LICENSE"],
+      assets: %{"static" => "static"}
     ]
   end
 
   defp description() do
-    "Elixir library for sending notifications to various messaging services."
+    "PingPong is a small Elixir notification library for sending messages through multiple services with one consistent API."
   end
 
   defp package() do
@@ -50,9 +51,9 @@ defmodule PingPong.MixProject do
       # This option is only needed when you don't want to use the OTP application name
       name: "pingpong",
       # These are the default files included in the package
-      files: ~w(lib static .formatter.exs mix.exs README* LICENSE*),
+      files: ~w(lib guides static .formatter.exs mix.exs README* LICENSE*),
       licenses: ["MIT"],
-      links: %{"GitHub" => ""}
+      links: %{"GitHub" => "https://github.com/Null-logic-0/ping_pong"}
     ]
   end
 end
